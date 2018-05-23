@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Cursos>
+    <materias>
+        <nome>Matematica</nome>
+        <codigo>01</codigo>
+    </materias>
+    <materias>
+        <nome>Portugues</nome>
+        <codigo>02</codigo>
+    </materias>
+    <materias>
+        <nome>Fisica</nome>
+        <codigo>03</codigo>
+    </materias>
+    <materias>
+        <nome>Biologia</nome>
+        <codigo>04</codigo>
+    </materias>
+</Cursos>

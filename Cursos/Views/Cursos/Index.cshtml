@@ -1,0 +1,54 @@
+﻿@model Cursos.Models.Cursos
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Cursos </h2>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#btnName").click(function() {
+                $.ajax({
+                    type: "Post",
+                    url: "Cursos/",
+                    data: {
+                        'nome': $("#name").val()
+                    },
+                    success: function(data) {
+                        $('#Materias').update(data.Materias);
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+@using (Html.BeginForm("Index", "Cursos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.Label("Matérias:", new
+        {
+            @class = "col-md-2 control-label"
+        })
+        <div class="col-md-10">
+            @Html.DropDownList("Materias", null, new
+            {
+                @class = "form-control"
+            })
+        </div>
+    </div>
+    <br/>
+    <div class="form-group">
+        @Html.Label("Insira uma nova matéria:", new
+        {
+            @class = "col-md-2 control-label"
+        })
+        <div class="col-md-10">
+            <input type="text" id="nome" name="nome">
+            <input type="submit" id="btnName" class="btn btn-default" value="Submit"/>
+        </div>
+    </div>
+}
