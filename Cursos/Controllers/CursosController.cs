@@ -15,7 +15,7 @@ namespace Cursos.Controllers
 
         public CursosController()
         {
-            var xml = XElement.Load(@"D:\Desenvolvimentos\DotNet\Cursos\Arquivo Combo.xml");
+            var xml = XElement.Load(@"C:\Desenvolvimentos\Cursos\Arquivo Combo.xml");
 
             var serializer = new XmlSerializer(typeof(Models.Cursos));
 
@@ -23,14 +23,12 @@ namespace Cursos.Controllers
             using (var reader = XmlReader.Create(stream))
             {
                 Cursos = (Models.Cursos)serializer.Deserialize(reader);
-                ViewBag.Materias = new SelectList(Cursos.Materias, "Codigo", "Nome");
             }
         }
         // GET: Cursos
         public ActionResult Index()
         {
             return View(Cursos);
-            
         }
 
         // POST: Cursos/Create

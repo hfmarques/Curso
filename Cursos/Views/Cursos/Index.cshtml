@@ -2,28 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2> Cursos </h2>
-
-@section scripts {
-    <script>
-        $(document).ready(function() {
-            $("#btnName").click(function() {
-                $.ajax({
-                    type: "Post",
-                    url: "Cursos/",
-                    data: {
-                        'nome': $("#name").val()
-                    },
-                    success: function(data) {
-                        $('#Materias').update(data.Materias);
-                    }
-                });
-            });
-        });
-    </script>
-}
-
 @using (Html.BeginForm("Index", "Cursos", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -34,13 +13,14 @@
             @class = "col-md-2 control-label"
         })
         <div class="col-md-10">
-            @Html.DropDownList("Materias", null, new
+            @Html.DropDownListFor(x => x.IdMateria, new SelectList(Model.Materias, "Codigo", "Nome"), new
             {
-                @class = "form-control"
+                @class = "form-control",
+                id="selectMaterias" 
             })
         </div>
     </div>
-    <br/>
+    <br />
     <div class="form-group">
         @Html.Label("Insira uma nova matéria:", new
         {
@@ -48,7 +28,21 @@
         })
         <div class="col-md-10">
             <input type="text" id="nome" name="nome">
-            <input type="submit" id="btnName" class="btn btn-default" value="Submit"/>
+            <input id="btnName" class="btn btn-default" value="Enviar"/>
         </div>
     </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnName").click(function () {
+                $('#selectMaterias').append($('<option>', {
+                    value: 1,
+                    text: $('#nome').val()
+                }));
+                $('#nome').val('');
+            });
+        });
+    </script>
 }
